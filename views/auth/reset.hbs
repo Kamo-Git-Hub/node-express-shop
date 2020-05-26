@@ -1,0 +1,29 @@
+  
+  <div class="auth">
+
+
+
+      {{#if error}}
+      {{error}}
+      {{/if}}
+
+
+<form action="/auth/reset" method="post">
+
+  <div class="input-field col s12">
+          <input id="email" type="email" class="validate" name="email" required>
+          <label for="email">Email</label>
+          <span class="helper-text" data-error="wrong" data-success="right">write email</span>
+        </div>
+
+    
+        <button class="btn" type="submit">Submit</button>
+
+
+</form>
+
+
+    </div>
+  
+    
+  

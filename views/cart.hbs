@@ -1,0 +1,35 @@
+<h1>Cart</h1>
+
+
+<div id="cart">
+    {{#if course.length}}
+    <table>
+        <thead>
+            <th>Curs Name</th>
+            <th>Count</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {{#each course}}
+            <tr>
+                <td>{{title}}</td>
+                <td>{{count}}</td>
+                <td>
+                    <button class="btn btn-small red js-remove" data-id="{{_id}}">delete</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <p><strong>Price: <span class="price">{{price}}</span></strong></p>
+
+
+    <form action="/orders" method="POST">
+    <button type="submit" class="btn red">to order</button>
+    </form>
+
+    {{else}}
+
+    <h3>Cart is empty</h3>
+    {{/if}}
+</div>

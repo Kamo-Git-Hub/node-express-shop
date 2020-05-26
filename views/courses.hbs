@@ -1,0 +1,30 @@
+<h1>Courses</h1>
+
+{{#each courses}}
+<div class="row">
+    <div class="col s12 m7">
+      <div class="card">
+        <div class="card-image">
+          <img src="{{img}}">
+        </div>
+         <span class="card-title">{{title}}</span>
+        <div class="card-content">
+          <h3 class="price">{{price}}</h3>
+        </div>
+        <div class="card-action">
+          <a href="/courses/{{_id}}">show</a>
+  {{#if @root.isAuth}}
+
+        {{#ifeq userId._id  @root.userId}}
+          <a href="/courses/{{_id}}/edit?mail===true">edit</a>
+          {{/ifeq}}
+        </div>
+        <form action="/cart/add" method="post">
+        <input type="hidden" name="id" value="{{_id}}">
+        <button type="submit" class="btn">to cart</button>
+        </form>
+  {{/if}}
+      </div>
+    </div>
+  </div>
+  {{/each}}
