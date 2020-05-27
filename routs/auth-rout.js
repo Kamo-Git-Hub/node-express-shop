@@ -7,6 +7,8 @@ const config = require("config")
 const regEmail = require('../email/reg-email')
 const crypto = require("crypto")
 const resetEmeil = require('../email/reset')
+const {validationResult} = require("express-validator")
+const {registerValidators} = require('../utils/validators')
 
 const router = Router()
 
@@ -63,23 +65,23 @@ router.get('/logaut',(req, res)=>{
 })
 
 
-router.post('/register', async(req, res)=>{
+router.post('/register',registerValidators, async(req, res)=>{
     const {email, password, name} = req.body
-    const candidat = await User.findOne({email})
+    
+     //validator
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+        req.flash("error",errors.array()[0].msg)
+        return res.status(422).redirect("/auth/login#register")
+    }
     //2=================================================
     const hashBycript = await bcrypt.hash(password, 12)
-    if(candidat){
-        req.flash("error","пользователь с таким email уже существует")
-        res.redirect('/auth/login#register')
-    }else{
+   
         const user = new User({email, password:hashBycript, name, cart:{items:[]}})
         await user.save()
         res.redirect('/auth/login')
         //1============================================
         await transporter.sendMail(regEmail(email))
-    }
-    
-    
 })
 
 
@@ -226,7 +228,19 @@ module.exports  =router
 //и в данном виде сохраняем нового ползователя
     
 
-
-
+/*7)валидации.. express-validaters
+импортируем то в зависимоти с чем мы работаем, 
+в данный момент мы работаем с body,
+В отдельном файле создаем валидатор и импортируем его /utils/validators
+и передаем ее в строку запроса.
+из библиотеки так же импортруем  функцию validationResult,
+именно она будет проверять на ошибку
+передаем ее переменной с параметром req
+далее проверяем если ошибка.isEmpty() отсуствует
+далее отправляем ошибку с помощю flash
+ошибку забираем из массива ошибки
+req.flash("error",errors.array()[0].msg)
+после чего прекрашаем работу данной функции
+*/
 
 

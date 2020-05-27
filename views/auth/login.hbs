@@ -16,7 +16,7 @@
       {{/if}}
 
 
-<form action="/auth/login" method="post">
+<form action="/auth/login" method="post" >
 
   <div class="input-field col s12">
           <input id="email" type="email" class="validate" name="email" required>
@@ -43,7 +43,7 @@
            {{#if error}}
       {{error}}
       {{/if}}
-        <form action="/auth/register" method="post">
+        <form action="/auth/register" method="post" novalidate>
 
   <div class="input-field col s12">
           <input id="remail" type="email" class="validate" name="email" required>
@@ -81,3 +81,6 @@
 
  
   </div>
+
+
+  
