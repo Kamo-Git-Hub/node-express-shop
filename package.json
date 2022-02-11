@@ -9,7 +9,7 @@
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^2.3.2",
     "express": "^4.17.1",
-    "express-handlebars": "^4.0.4",
+    "express-handlebars": "^5.3.1",
     "express-session": "^1.17.1",
     "express-validator": "^6.5.0",
     "git": "^0.1.5",
